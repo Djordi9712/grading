@@ -24,6 +24,7 @@ public class CorrectionService {
             if (entry.getValue().getExamId() == correction.getId()) {
                 gradingService.removeUngradedExam(entry.getKey());
                 gradingService.gradeExamination(entry.getKey(), entry.getValue());
+
             }
         }
     }

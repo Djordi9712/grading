@@ -15,7 +15,7 @@ public class GradingService {
     @Autowired
     CorrectionService correctionService;
 
-    private static final Map<ExamKey, Examination> ungradedExams = Collections.synchronizedMap(new HashMap<>());
+    private static Map<ExamKey, Examination> ungradedExams = new HashMap<>();
     private static final Map<ExamKey, Examination> gradedExams = Collections.synchronizedMap(new HashMap<>());
 
     /*Get all the ungraded exams*/
@@ -31,17 +31,14 @@ public class GradingService {
 
     /*Delete an exam from the ungraded exams*/
     public void removeUngradedExam(ExamKey examKey) {
-        Map.Entry<ExamKey, Examination> exam = ungradedExams.entrySet().stream().filter(entry -> entry.getKey().equals(examKey)).findFirst().orElse(null);
-        if (exam != null) {
-            getUngradedExams().remove(exam);
-        }
+        ungradedExams.entrySet().removeIf(entry -> entry.getKey().equals(examKey));
 }
 
     public void gradeExamination(ExamKey examKey, Examination exam) {
         /*Check if the student has already handed in the exam */
         if (!(ungradedExams.entrySet().stream().filter(examination -> examination.getKey().equals(examKey)).findAny().isPresent() |
                 gradedExams.entrySet().stream().filter(examination -> examination.getKey().equals(examKey)).findAny().isPresent())) {
-
+            System.out.println("Grading exam");
             /*Retrieve the correction model if available, otherwise put the exam in the list of ungraded exams*/
             Correctionmodel correctionmodel = correctionService.getCorrectionModelByID(exam.getExamId());
             if (correctionmodel != null) {
@@ -57,13 +54,16 @@ public class GradingService {
                     }
                     /*Update the grade of the exam*/
                     DecimalFormat df = new DecimalFormat("#.#");
-                    double grade = score/totalScore*9+1;
+                    double grade = score / totalScore * 9 + 1;
                     exam.setGrade(grade);
                     gradedExams.put(examKey, exam);
                 }
             } else {
+                System.out.println("Exam not graded");
                 ungradedExams.put(examKey, exam);
             }
+        } else {
+            System.out.println("FUCK");
         }
     }
 }
