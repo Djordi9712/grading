@@ -61,7 +61,7 @@ public class JmsConfiguration {
     public MarshallingMessageConverter jaxbMarshaller() {
         // New XML Marshaller
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("nl.utwente.soa.digital.testing.examination.domain");
+        jaxb2Marshaller.setPackagesToScan("integration");
 //        jaxb2Marshaller.setSchemas(
 //                resourceLoader.getResource("classpath:xsd/CalculatorResponse.xsd"),
 //                resourceLoader.getResource("classpath:xsd/CalculatorTask.xsd")
