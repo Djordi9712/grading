@@ -1,5 +1,5 @@
 
-package integration.teacherExam;
+package nl.utwente.soa.digital.testing.grading.integration.teacherExam;
 
 import java.util.ArrayList;
 import java.util.List;

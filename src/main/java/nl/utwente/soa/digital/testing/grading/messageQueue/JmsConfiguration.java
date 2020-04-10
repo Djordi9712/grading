@@ -61,18 +61,13 @@ public class JmsConfiguration {
     public MarshallingMessageConverter jaxbMarshaller() {
         // New XML Marshaller
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("integration");
-//        jaxb2Marshaller.setSchemas(
-//                resourceLoader.getResource("classpath:xsd/CalculatorResponse.xsd"),
-//                resourceLoader.getResource("classpath:xsd/CalculatorTask.xsd")
-//        );
+        jaxb2Marshaller.setPackagesToScan("nl/utwente/soa/digital/testing/grading/integration");
         jaxb2Marshaller.setMarshallerProperties(Collections.singletonMap("jaxb.formatted.output", true));
         try {
             jaxb2Marshaller.afterPropertiesSet();
         } catch (Exception e) {
             log.error("Could not update marshaller properties", e);
         }
-
 
         // Configure it in the JMS messageconverter
         MarshallingMessageConverter converter = new MarshallingMessageConverter();
@@ -81,7 +76,6 @@ public class JmsConfiguration {
         converter.setUnmarshaller(jaxb2Marshaller);
         return converter;
     }
-
 
     /**
      * Create the JmsListernerFactory with the correct marshaller.

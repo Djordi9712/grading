@@ -1,5 +1,6 @@
 package nl.utwente.soa.digital.testing.grading.domain;
 
+/*Unique identifier for an examination , consisting of the exam id and the student id */
 public class ExamKey {
 
     private Integer e_id;
@@ -26,6 +27,7 @@ public class ExamKey {
         this.s_id = s_id;
     }
 
+    /*Equals method overwritten to compare two exam keys*/
     @Override
     public boolean equals(Object o) {
         if(o != null && o instanceof ExamKey) {
