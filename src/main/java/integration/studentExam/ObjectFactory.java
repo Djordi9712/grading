@@ -1,5 +1,5 @@
 
-package integration;
+package integration.studentExam;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

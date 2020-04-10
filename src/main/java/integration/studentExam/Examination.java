@@ -1,13 +1,9 @@
 
-package integration;
+package integration.studentExam;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -20,6 +16,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="examId" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *         &lt;element name="studentId" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="answers">
  *           &lt;complexType>
  *             &lt;complexContent>
@@ -52,13 +50,68 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "examId",
+    "studentId",
     "answers"
 })
 @XmlRootElement(name = "examination")
 public class Examination {
 
+    protected byte examId;
+    @XmlElement(required = true)
+    protected String studentId;
     @XmlElement(required = true)
     protected Examination.Answers answers;
+    @XmlTransient
+    private double grade;
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+    /**
+     * Gets the value of the examId property.
+     * 
+     */
+    public byte getExamId() {
+        return examId;
+    }
+
+    /**
+     * Sets the value of the examId property.
+     * 
+     */
+    public void setExamId(byte value) {
+        this.examId = value;
+    }
+
+    /**
+     * Gets the value of the studentId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getStudentId() {
+        return studentId;
+    }
+
+    /**
+     * Sets the value of the studentId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStudentId(String value) {
+        this.studentId = value;
+    }
 
     /**
      * Gets the value of the answers property.

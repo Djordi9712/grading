@@ -1,4 +1,4 @@
-package nl.utwente.soa.digital.testing.grading;
+package nl.utwente.soa.digital.testing.grading.messageQueue;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
